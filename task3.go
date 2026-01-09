@@ -10,14 +10,15 @@ func encryptWord(word string) string {
 		return word
 	}
 
-	first := string(word[0])
-	rest := word[1:]
-	restRunes := []rune(rest)
-	for i, j := 0, len(restRunes)-1; i < j; i, j = i+1, j-1 {
-		restRunes[i], restRunes[j] = restRunes[j], restRunes[i]
+	runes := []rune(word)
+	first := runes[0]
+
+	reversed := ""
+	for i := len(runes) - 1; i >= 1; i-- {
+		reversed += string(runes[i])
 	}
 
-	return first + string(restRunes)
+	return string(first) + reversed
 }
 
 func encryptPhrase(phrase string) string {
@@ -48,7 +49,7 @@ func main() {
 	fmt.Printf("Исходная фраза: %s\n", testPhrase4)
 	fmt.Printf("Зашифрованная:  %s\n\n", encryptPhrase(testPhrase4))
 
-	testPhrase5 := "Ganvest is also a legend"
+	testPhrase5 := "Ганвест лега"
 	fmt.Printf("Исходная фраза: %s\n", testPhrase5)
 	fmt.Printf("Зашифрованная:  %s\n\n", encryptPhrase(testPhrase5))
 }
